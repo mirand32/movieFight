@@ -1,6 +1,5 @@
 const movieQuery1=document.querySelector(".movie1 input")
 const movieQuery2=document.querySelector(".movie2 input")
-let timeoutID
 class Movie{
     constructor({ Title, Year, Poster, imdbID}){
         this.title=Title
@@ -10,7 +9,7 @@ class Movie{
     }
 }
 
-async function fetchData(el) {
+const fetchData = async (el)=> {
     const dropdownList = el.nextElementSibling
     dropdownList.innerHTML = ""
     const response = await axios.get("http://www.omdbapi.com/", {
@@ -51,17 +50,26 @@ function displaySearchRes(movies,dropdownList){
     }
 }
 
-function onInput(e){
-    if(timeoutID){
-        clearTimeout(timeoutID)
+const debounce = (func, delay) =>{
+    console.log("1")
+    let timeoutID
+    return (...args)=>{
+        if (timeoutID){
+            clearTimeout(timeoutID)
+        }
+        timeoutID=setTimeout(()=>{
+            func.apply(null, args)
+        },delay)
     }
-    timeoutID=setTimeout(()=>{
-        fetchData(e.target)
-    },1000)
-
 }
 
-movieQuery1.addEventListener("input",onInput)
+const hello=(x)=>{
+    alert(x)
+}
+
+movieQuery1.addEventListener("input",debounce((e)=>{
+    fetchData(e.target)
+},2000))
 
 // on keypress run search
 // for search get info 
