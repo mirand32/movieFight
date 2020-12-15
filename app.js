@@ -9,33 +9,20 @@ class Movie{
     }
 }
 
-const fetchData = async (el)=> {
-    const dropdownList = el.nextElementSibling
-    dropdownList.innerHTML = ""
+const fetchData = async (e)=> {
     const response = await axios.get("http://www.omdbapi.com/", {
         params:{
             apikey: "841c5c1b",
-            s:el.value
+            s:e.target.value
         }
     })
-    
-    const movies=response.data.Search
-    displaySearchRes(movies, dropdownList)
+    if (response.data.Error){
+        return []
+    }
+    return response.data.Search
 }
 
-async function displayMovie(e){
-    const movieID=this.id
-    const response = await axios.get("http://www.omdbapi.com/", {
-        params: {
-            apikey: "841c5c1b",
-            i: movieID
-        }
-    })
-    this.parentElement.innerHTML=""
-    console.log(response.data)
-}
-
-function displaySearchRes(movies,dropdownList){
+const displaySearchRes=(movies,dropdownList)=>{
     for (movieData of movies) {
         const movie= new Movie(movieData)
         const newMovie = document.createElement("button")
@@ -50,26 +37,32 @@ function displaySearchRes(movies,dropdownList){
     }
 }
 
-const debounce = (func, delay) =>{
-    console.log("1")
-    let timeoutID
-    return (...args)=>{
-        if (timeoutID){
-            clearTimeout(timeoutID)
+async function displayMovie(e){
+    const movieID=this.id
+    const response = await axios.get("http://www.omdbapi.com/", {
+        params: {
+            apikey: "841c5c1b",
+            i: movieID
         }
-        timeoutID=setTimeout(()=>{
-            func.apply(null, args)
-        },delay)
-    }
+    })
+    this.parentElement.innerHTML=""
+    console.log(response.data)
 }
 
-const hello=(x)=>{
-    alert(x)
+const displayError = (content) => {
+    const errorItem=document.createElement("h4")
+    errorItem.classList.add("dropdown-item")
+    errorItem.innerHTML="No Results Found"
+    content.appendChild(errorItem)
 }
 
-movieQuery1.addEventListener("input",debounce((e)=>{
-    fetchData(e.target)
-},2000))
+const onInput = debounce(async (e) => {
+    const movies=await fetchData(e);
+    const dropdownList = e.target.nextElementSibling
+    dropdownList.innerHTML=""
+    if (movies.length===0)displayError(dropdownList)
+    displaySearchRes(movies, dropdownList);
+}, 500);
 
-// on keypress run search
-// for search get info 
+movieQuery1.addEventListener("input",onInput)
+movieQuery2.addEventListener("input",onInput)
