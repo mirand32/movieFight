@@ -1,3 +1,15 @@
+.hero {
+  margin-bottom: 20px;
+}
+
+.notification {
+  height: 105px;
+}
+
+.media {
+  height: 260px;
+}
+
 figure.image {
   display: flex;
   justify-content: center;
@@ -7,7 +19,6 @@ figure.image {
 figure .image img {
   width: 128px;
 }
-
 
 .results {
   max-height: 500px;
@@ -24,10 +35,22 @@ figure .image img {
   margin-left: 15px;
 }
 
+.card-content .media-left{
+  min-width:94px;
+  width: 30%;
+}
+
+
+/* Dropdown items */
+
 .dropdown{
   width: 100%;
   min-width: 200px;
   display: block;
+}
+
+.dropdown-menu{
+  width: 100%;
 }
 
 .dropdown-content{
@@ -37,52 +60,19 @@ figure .image img {
   max-height: 500px;
 }
 
-.dropdown-menu{
-  width:100%
-}
-
-button.dropdown-item{
-  white-space: normal;
-}
-
-.dropdown-item{
+.dropdown-item {
   display: flex;
   flex-direction: row;
   padding-bottom: 20px;
   align-items: center;
 }
 
-.dropdown-menu{
-  max-width: 100%;
-}
-
-.dropdown-item img{
-  height: 50px;
-  margin-right: 10px;
-}
-
-.card-content .media-left{
-  background:red;
-  min-width:94px;
-  width: 30%;
-}
-
-.hero {
-  margin-bottom: 20px;
-}
-
-.forms {
-  display: flex;
-  justify-content: space-around;
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  height: 60px;
-}
-
 .dropdown-item img {
   height: 50px;
   margin-right: 10px;
+}
+
+
+button.dropdown-item{
+  white-space: normal;
 }
