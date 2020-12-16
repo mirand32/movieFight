@@ -2,8 +2,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<img src="assets/demo2"/>
-<img src="assets/demo3"/>
+<img src="assets/demo2.png">
+<img src="assets/demo3.png">
 
 * []()Build reusable widget for autocomplete
 * []()Use axios to fetch data from api
