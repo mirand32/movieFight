@@ -33,8 +33,9 @@ figure .image img {
 }
 
 .dropdown{
-  width: 400px;
-  max-width: 50%;
+  width: 100%;
+  min-width: 200px;
+  display: block;
 }
 
 .dropdown-content{
@@ -45,6 +46,14 @@ figure .image img {
   overflow-y: scroll;
 }
 
+.dropdown-menu{
+  width:100%
+}
+
+button.dropdown-item{
+  white-space: normal;
+}
+
 .dropdown-item{
   display: flex;
   flex-direction: row;
@@ -52,9 +61,19 @@ figure .image img {
   align-items: center;
 }
 
+.dropdown-menu{
+  max-width: 100%;
+}
+
 .dropdown-item img{
   height: 50px;
-  margin-right: 20px;
+  margin-right: 10px;
+}
+
+.card-content .media-left{
+  background:red;
+  min-width:94px;
+  width: 30%;
 }
 /* 
 .hero {
