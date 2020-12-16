@@ -1,4 +1,9 @@
-const createAutoComplete=async ({root,getData,renderOption,onSelectOption})=>{
+const createAutoComplete=({
+    root,
+    fetchData,
+    renderOption,
+    onOptionSelect
+})=>{
     root.innerHTML = `
     <label><b>Search For a Movie</b></label>
     <input type="text" class="dropdown-trigger input">
@@ -14,7 +19,8 @@ const createAutoComplete=async ({root,getData,renderOption,onSelectOption})=>{
     const onInput = debounce(async (e) => {
         root.querySelector(".dropdown")
             .classList.add("is-active");
-        const data= await getData(e)
+        root.querySelector(".dropdown-content").innerHTML=""
+        const data= await fetchData(e)
         handleData(data)
     }, 500);
     
@@ -26,7 +32,7 @@ const createAutoComplete=async ({root,getData,renderOption,onSelectOption})=>{
             const el = renderOption(item);
             el.classList.add("dropdown-item");
             el.addEventListener("click",()=>{
-                onSelectOption(item,input,content)
+                onOptionSelect(item,input,content)
             })
             content.appendChild(el)
         }
